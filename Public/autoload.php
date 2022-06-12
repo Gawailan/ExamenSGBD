@@ -5,11 +5,11 @@
 spl_autoload_register ( function ($class) 
 {
 	if (strpos ( $class, "DAO") !== false) {
-		require_once("models/dao/{$class}.php");
+		require_once("../Models/DAO/{$class}.php");
 	} else if (strpos ( $class, "Controller") !== false) {
-        require_once("controllers/{$class}.php");
+        require_once("../Controllers/{$class}.php");
     } else {
-		require_once("models/entities/{$class}.php");
+		require_once("../Models/Entities/{$class}.php");
 	}
 }
 );
