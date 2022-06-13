@@ -4,14 +4,14 @@ class AnimalController extends Controller
 {
     public function index()
     {
-        $Animals = Animal::all();
+        $animals = Animal::all();
         include('../Public/Views/Animals/listAnimal.php');
     }
 
     public function show($id)
     {
-        $game = Animal::find($id);
-        include('views/games/one.php');
+        $animal = Animal::find($id);
+        include('../Public/Views/Animals/oneAnimal.php');
     }
 
     public function create()
@@ -22,13 +22,11 @@ class AnimalController extends Controller
 
     public function store($data)
     {
-        var_dump($data);
         $owner = $data['owner_id'] ? Person::find($data['owner_id']) : false;
-        var_dump($owner);
         $name = $data['name'] ? $data['name'] : false;
-        $gender = $data['gender'] ? $data['gender'] : false;
+        $gender = $data['gender'];
         $bday = $data['bday'] ? $data['bday'] : false;
-        $sterilized = $data['sterilized'] ? $data['sterilized'] : false;
+        $sterilized = $data['sterilized'];
         $owner = $data['owner_id'] ? $data['owner_id'] : false;
 
         $animal = new Animal(0, $name, $gender, $bday, $sterilized, $owner);
@@ -38,9 +36,9 @@ class AnimalController extends Controller
 
     public function edit($id)
     {
-        $game = Animal::find($id);
-        $types = Type::all();
-        include('views/games/edit.php');
+        $animal = Animal::find($id);
+        $persons = Person::all();
+        include('../Public/Views/Animals/editAnimal.php');
     }
 
     public function update($id, $data)
@@ -60,11 +58,11 @@ class AnimalController extends Controller
 
     public function destroy($id)
     {
-        $game = Animal::find($id);
-        if (!$game) {
+        $animal = Animal::find($id);
+        if (!$animal) {
             return false;
         }
-        $game->delete();
+        $animal->delete();
         return $this->index();
     }
 }

@@ -14,10 +14,10 @@
     <?php if (isset($animals) && !empty($animals)) : ?>
         <ul>
             <?php foreach ($animals as $animal) : ?>
-                <li><a href="index.php?entity=Person&id=<?= $animal->id; ?>"><?= $animal->name; ?></a>
-                    <a href="index.php?entity=Person&id=<?= $animal->id; ?>&action=edit">MODIF</a>
+                <li><a href="index.php?entity=Animal&id=<?= $animal->id; ?>"><?= $animal->name; ?></a>
+                    <a href="index.php?entity=Animal&id=<?= $animal->id; ?>&action=edit">MODIF</a>
                     <form action="index.php" method="POST">
-                        <input type="hidden" name="entity" value="Person">
+                        <input type="hidden" name="entity" value="Animal">
                         <input type="hidden" name="action" value="destroy">
                         <input type="hidden" name="id" value="<?= $animal->id; ?>">
                         <input type="submit" value="SUPPR">

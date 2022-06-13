@@ -22,8 +22,8 @@
                     </form>
                 </li>
             <?php endforeach; ?>
-            <a href="index.php?entity=Person&action=create">CREATE</a>
         </ul>
     <?php endif; ?>
+    <a href="index.php?entity=Person&action=create">CREATE</a>
 </body>
 </html>
