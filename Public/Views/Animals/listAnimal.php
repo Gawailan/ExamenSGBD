@@ -9,13 +9,13 @@
 <body>
     <ul>
         <li><a href="index.php?entity=Person">Personnes</a></li>
-        <li><a href="index.php?entity=type">Séjour</a></li>
+        <li><a href="index.php?entity=Boarding">Séjour</a></li>
     </ul>
     <?php if (isset($animals) && !empty($animals)) : ?>
         <ul>
             <?php foreach ($animals as $animal) : ?>
                 <li><a href="index.php?entity=Animal&id=<?= $animal->id; ?>"><?= $animal->name; ?></a>
-                    <a href="index.php?entity=Animal&id=<?= $animal->id; ?>&action=edit">MODIF</a>
+                    <a href="index.php?entity=Animal&id=<?= $animal->id; ?>&action=edit">Editer</a>
                     <form action="index.php" method="POST">
                         <input type="hidden" name="entity" value="Animal">
                         <input type="hidden" name="action" value="destroy">
@@ -26,7 +26,7 @@
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
-    <a href="index.php?entity=Animal&action=create">Reserver un séjour.</a>
+    <a href="index.php?entity=Animal&action=create">Ajouter un animal</a>
 </body>
 
 </html>

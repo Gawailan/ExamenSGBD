@@ -1,41 +1,38 @@
 <?php 
 
-class AnimalDAO extends DAO {
+class BoardingDAO extends DAO {
       
     public function __construct () {
-        parent::__construct("t_animals");
+        parent::__construct("t_boardings");
     }
     
     public function create ($data) {
-        if ($data instanceof Animal) {
+        if ($data instanceof Boarding) {
             return $data;
         }
         
         if (!is_object($data)) {
-            return new Animal(
+            return new Boarding(
                 isset($data['id']) ? $data['id'] : 0,
-                $data['name_animal'],
-                $data['gender_animal'],
-                $data['bday_animal'],
-                $data['sterilized_animal'],
-                $data['microship_animal'],
-                $data['fk_id_person']
+                $data['startDate_boarding'],
+                $data['endDate_boarding'],
+                $data['fk_id_animal']
             );
         }
         return false;
     }
     
     public function store ($data , $statement = false) {
-        $animal = $this->create($data);
-        if (!$animal) {
+        $boarding = $this->create($data);
+        if (!$boarding) {
             return false;
         }
-        if ($animal->owner) {
-            $statement = $this->db->prepare("INSERT INTO {$this->table} (name_animal, gender_animal, bday_animal, sterilized_animal, microship_animal, fk_id_person) VALUES (?, ?, ?, ?, ?, ?)");
-            parent::store([$animal->name, $animal->gender, $animal->bday, $animal->sterilized, $animal->microship, $animal->owner->id], $statement);
+        if ($boarding->animal) {
+            $statement = $this->db->prepare("INSERT INTO {$this->table} (startDate_boarding, endDate_boarding, fk_id_animal) VALUES (?, ?, ?)");
+            parent::store([$boarding->dateStart, $boarding->dateEnd, $boarding->animal->id], $statement);
         } else {
-            $statement = $this->db->prepare("INSERT INTO {$this->table} (name) VALUES (?)");
-            parent::store([$animal->name], $statement);
+            //$statement = $this->db->prepare("INSERT INTO {$this->table} (name) VALUES (?)");
+            //parent::store([$boarding->name], $statement);
         }
         
     }

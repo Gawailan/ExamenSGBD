@@ -7,15 +7,17 @@ class Animal extends Entity {
     protected $gender;
     protected $bday;
     protected $sterilized;
+    protected $microship;
     protected $owner;
     protected static $dao_name = "AnimalDAO";
     
-    public function __construct ($id, $name, $gender, $bday, $sterilized, $owner) {
+    public function __construct ($id, $name, $gender, $bday, $sterilized, $microship, $owner) {
         $this->id = $id;
         $this->name = $name;
         $this->gender = $gender;
         $this->bday = $bday;
         $this->sterilized = $sterilized;
+        $this->microship = $microship;
         $this->owner = $owner;
         parent::__construct(self::$dao_name);
     }

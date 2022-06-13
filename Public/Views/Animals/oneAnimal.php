@@ -29,6 +29,10 @@
     </b>
     <?= $animal->sterilized; ?>
     <b>
+        <p>Numéro de puce:</p>
+    </b>
+    <?= $animal->microship; ?>
+    <b>
         <p>Proprietaire</p>
     </b>
     <a href="index.php?entity=Person&id=<?= $animal->owner->id; ?>"><?= $animal->owner->name; ?> <?= $animal->owner->firstname; ?></a>

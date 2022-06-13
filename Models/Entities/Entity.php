@@ -24,7 +24,6 @@ abstract class Entity implements EntityInterface {
             return $this->dao->update($this);
         }
         return $this->dao->store($this);
-        unset($_POST);
     }
     
     public function delete () {
