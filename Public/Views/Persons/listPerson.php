@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Games</title>
 </head>
+
 <body>
-   <ul>
-       <li><a href="index.php?entity=Animal">Animaux</a></li>
-       <li><a href="index.php?entity=Boarding">Séjour</a></li>
-   </ul>
-    <?php if (isset($persons) && !empty($persons)): ?>
+    <ul>
+        <li><a href="index.php?entity=Person">Personnes</a></li>
+        <li><a href="index.php?entity=Boarding">Séjour</a></li>
+        <li><a href="index.php?entity=Animal">Animaux</a></li>
+    </ul>
+    <?php if (isset($persons) && !empty($persons)) : ?>
         <ul>
-            <?php foreach($persons as $person): ?>
+            <?php foreach ($persons as $person) : ?>
                 <li><a href="index.php?entity=Person&id=<?= $person->id; ?>"><?= $person->name; ?> <?= $person->firstname; ?></a>
                     <a href="index.php?entity=Person&id=<?= $person->id; ?>&action=edit">Editer</a>
                     <form action="index.php" method="POST">
@@ -26,4 +29,5 @@
     <?php endif; ?>
     <a href="index.php?entity=Person&action=create">Ajouter un propriétaire</a>
 </body>
+
 </html>

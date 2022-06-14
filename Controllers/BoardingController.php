@@ -10,8 +10,8 @@ class BoardingController extends Controller
 
     public function show($id)
     {
-        $animal = Animal::find($id);
-        include('../Public/Views/Boarding/oneBoarding.php');
+        $boarding = Boarding::find($id);
+        include('../Public/Views/Boardings/oneBoarding.php');
     }
 
     public function create()
@@ -35,9 +35,9 @@ class BoardingController extends Controller
 
     public function edit($id)
     {
-        $animal = Animal::find($id);
-        $persons = Person::all();
-        include('../Public/Views/Animals/editAnimal.php');
+        $boarding = Boarding::find($id);
+        $animals = Animal::all();
+        include('../Public/Views/Boardings/editBoarding.php');
     }
 
     public function update($id, $data)

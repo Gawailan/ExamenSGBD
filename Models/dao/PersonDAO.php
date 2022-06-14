@@ -21,7 +21,7 @@ class PersonDAO extends DAO
                 $data['firstname_person'],
                 $data['bday_person'],
                 $data['email_person'],
-                $data['phone_person']
+                $data['phone_person'],
             );
         }
 

@@ -8,14 +8,15 @@
 
 <body>
     <ul>
-        <li><a href="index.php?entity=Animal">Animaux</a></li>
+        <li><a href="index.php?entity=Person">Personnes</a></li>
         <li><a href="index.php?entity=Boarding">Séjour</a></li>
+        <li><a href="index.php?entity=Animal">Animaux</a></li>
     </ul>
     <?php if (isset($boardings) && !empty($boardings)) : ?>
         <ul>
             <?php foreach ($boardings as $boarding) : ?>
-                <li><a href="index.php?entity=Animal&id=<?= $boarding->id; ?>"><?= $boarding->animal->name; ?> <?= $boarding->dateStart?></a>
-                    <a href="index.php?entity=Animal&id=<?= $boarding->id; ?>&action=edit">Editer</a>
+                <li><a href="index.php?entity=Boarding&id=<?= $boarding->id; ?>"><?= $boarding->animal->name; ?> <?= $boarding->dateStart ?></a>
+                    <a href="index.php?entity=Boarding&id=<?= $boarding->id; ?>&action=edit">Editer</a>
                     <form action="index.php" method="POST">
                         <input type="hidden" name="entity" value="Boarding">
                         <input type="hidden" name="action" value="destroy">
