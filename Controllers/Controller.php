@@ -32,7 +32,7 @@ abstract class Controller
         var_dump('action edit not defined');
     }
     
-    public function update ($id, $data) 
+    public function update ($data) 
     {
         var_dump('action update not defined');
     }

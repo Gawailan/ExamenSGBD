@@ -3,17 +3,17 @@
 class PersonController extends Controller {
     public function index () {
         $persons = Person::all();
-        include('../Public/Views/Persons/listPerson.php');
+        include('../Views/Persons/listPerson.php');
     }
     
     public function show ($id) {
         $person = Person::find($id);
-        include('../Public/Views/Persons/onePerson.php');
+        include('../Views/Persons/onePerson.php');
     }
     
     public function create () {
         $person = Person::all();
-        include('../Public/Views/Persons/createPerson.php');
+        include('../Views/Persons/createPerson.php');
     }
      
     public function store ($data) {
@@ -29,11 +29,11 @@ class PersonController extends Controller {
     public function edit ($id) {
         $person = Person::find($id);
         //$types = Type::all();
-        include('../Public/Views/Persons/editPerson.php');
+        include('../Views/Persons/editPerson.php');
     }
     
-    public function update($id, $data) {
-        $person = Person::find($id);
+    public function update($data) {
+        $person = Person::find($data['id']);
         if (!$person) {
             return false;
         }
@@ -49,7 +49,7 @@ class PersonController extends Controller {
     }
     
     public function destroy ($id) {
-        $person = Person::find($id);
+        $person = Person::find($id['id']);
         if (!$person) {
             return false;
         }

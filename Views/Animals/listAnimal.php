@@ -7,10 +7,10 @@
 </head>
 
 <body>
-    <ul>
-        <li><a href="index.php?entity=Person">Personnes</a></li>
-        <li><a href="index.php?entity=Boarding">Séjour</a></li>
-        <li><a href="index.php?entity=Animal">Animaux</a></li>
+<ul>
+        <li><a href="/person">Personnes</a></li>
+        <li><a href="/boarding">Séjour</a></li>
+        <li><a href="/animal">Animaux</a></li>
     </ul>
     <?php if (isset($animals) && !empty($animals)) : ?>
         <ul>

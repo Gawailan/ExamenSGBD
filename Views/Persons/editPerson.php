@@ -7,15 +7,13 @@
 </head>
 
 <body>
-    <ul>
-        <li><a href="index.php?entity=Person">Personnes</a></li>
-        <li><a href="index.php?entity=Boarding">Séjour</a></li>
-        <li><a href="index.php?entity=Animal">Animaux</a></li>
+<ul>
+        <li><a href="/person">Personnes</a></li>
+        <li><a href="/boarding">Séjour</a></li>
+        <li><a href="/animal">Animaux</a></li>
     </ul>
-    <form action="index.php" method="post">
+    <form action="/person/update" method="post">
         <input type="hidden" name="id" value="<?= $person->id ?>">
-        <input type="hidden" name="entity" value="Person">
-        <input type="hidden" name="action" value="update">
         <label for="person-name">Nom:</label>
         <input id="person-name" type="text" name="name" value="<?= $person->name; ?>">
         <label for="person-firstname">Prenom:</label>

@@ -7,10 +7,10 @@
 </head>
 
 <body>
-    <ul>
-        <li><a href="index.php?entity=Person">Personnes</a></li>
-        <li><a href="index.php?entity=type">Séjour</a></li>
-        <li><a href="index.php?entity=Animal">Animaux</a></li>
+<ul>
+        <li><a href="/person">Personnes</a></li>
+        <li><a href="/boarding">Séjour</a></li>
+        <li><a href="/animal">Animaux</a></li>
     </ul>
     <b>
         <p>Nom de l'animal:</p>

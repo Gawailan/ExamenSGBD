@@ -5,19 +5,19 @@ class AnimalController extends Controller
     public function index()
     {
         $animals = Animal::all();
-        include('../Public/Views/Animals/listAnimal.php');
+        include('../Views/Animals/listAnimal.php');
     }
 
     public function show($id)
     {
         $animal = Animal::find($id);
-        include('../Public/Views/Animals/oneAnimal.php');
+        include('../Views/Animals/oneAnimal.php');
     }
 
     public function create()
     {
         $persons = Person::all();
-        include('../Public/Views/Animals/createAnimal.php');
+        include('../Views/Animals/createAnimal.php');
     }
 
     public function store($data)
@@ -39,12 +39,12 @@ class AnimalController extends Controller
     {
         $animal = Animal::find($id);
         $persons = Person::all();
-        include('../Public/Views/Animals/editAnimal.php');
+        include('../Views/Animals/editAnimal.php');
     }
 
-    public function update($id, $data)
+    public function update($data)
     {
-        $animal = Animal::find($id);
+        $animal = Animal::find($data['id']);
         if (!$animal) {
             return false;
         }

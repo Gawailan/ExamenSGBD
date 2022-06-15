@@ -5,19 +5,19 @@ class BoardingController extends Controller
     public function index()
     {
         $boardings = Boarding::all();
-        include('../Public/Views/Boardings/listBoarding.php');
+        include('../Views/Boardings/listBoarding.php');
     }
 
     public function show($id)
     {
         $boarding = Boarding::find($id);
-        include('../Public/Views/Boardings/oneBoarding.php');
+        include('../Views/Boardings/oneBoarding.php');
     }
 
     public function create()
     {
         $animals = Animal::all();
-        include('../Public/Views/Boardings/createBoarding.php');
+        include('../Views/Boardings/createBoarding.php');
     }
 
     public function store($data)
@@ -37,12 +37,12 @@ class BoardingController extends Controller
     {
         $boarding = Boarding::find($id);
         $animals = Animal::all();
-        include('../Public/Views/Boardings/editBoarding.php');
+        include('../Views/Boardings/editBoarding.php');
     }
 
-    public function update($id, $data)
+    public function update($data)
     {
-        $animal = Animal::find($id);
+        $animal = Animal::find($data['id']);
         if (!$animal) {
             return false;
         }
