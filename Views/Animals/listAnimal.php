@@ -15,11 +15,9 @@
     <?php if (isset($animals) && !empty($animals)) : ?>
         <ul>
             <?php foreach ($animals as $animal) : ?>
-                <li><a href="index.php?entity=Animal&id=<?= $animal->id; ?>"><?= $animal->name; ?></a>
-                    <a href="index.php?entity=Animal&id=<?= $animal->id; ?>&action=edit">Editer</a>
+                <li><a href="/animal/show/<?= $animal->id; ?>"><?= $animal->name; ?> (<?= $animal->owner->name ?> <?= $animal->owner->firstname ?>)</a>
+                    <a href="/animal/edit/<?= $animal->id; ?>">Editer</a>
                     <form action="index.php" method="POST">
-                        <input type="hidden" name="entity" value="Animal">
-                        <input type="hidden" name="action" value="destroy">
                         <input type="hidden" name="id" value="<?= $animal->id; ?>">
                         <input type="submit" value="SUPPR">
                     </form>
@@ -27,7 +25,7 @@
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
-    <a href="index.php?entity=Animal&action=create">Ajouter un animal</a>
+    <a href="/animal/create">Ajouter un animal</a>
 </body>
 
 </html>

@@ -12,9 +12,7 @@
         <li><a href="/boarding">Séjour</a></li>
         <li><a href="/animal">Animaux</a></li>
     </ul>
-    <form action="index.php" method="post">
-        <input type="hidden" name="entity" value="Animal">
-        <input type="hidden" name="action" value="store">
+    <form action="/animal/store" method="post">
         <label for="animal-name">Nom de l'animal:</label>
         <input id="animal-name" type="text" name="name">
         <fieldset>

@@ -35,7 +35,7 @@
     <b>
         <p>Proprietaire</p>
     </b>
-    <a href="index.php?entity=Person&id=<?= $animal->owner->id; ?>"><?= $animal->owner->name; ?> <?= $animal->owner->firstname; ?></a>
+    <a href="/person/show/<?= $animal->owner->id; ?>"><?= $animal->owner->name; ?> <?= $animal->owner->firstname; ?></a>
 </body>
 
 </html>

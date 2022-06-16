@@ -15,11 +15,11 @@
     <b>
         <p>Nom de l'animal:</p>
     </b>
-    <a href="index.php?entity=Animal&id=<?= $boarding->animal->id; ?>"><?= $boarding->animal->name; ?></a>
+    <a href="/animal/show/<?= $boarding->animal->id; ?>"><?= $boarding->animal->name; ?></a>
     <b>
         <p>Proprietaire</p>
     </b>
-    <a href="index.php?entity=Person&id=<?= $boarding->animal->owner->id; ?>"><?= $boarding->animal->owner->name; ?> <?= $boarding->animal->owner->firstname; ?></a>
+    <a href="/person/show/<?= $boarding->animal->owner->id; ?>"><?= $boarding->animal->owner->name; ?> <?= $boarding->animal->owner->firstname; ?></a>
     <b>
         <p>Date du début du séjour:</p>
     </b>

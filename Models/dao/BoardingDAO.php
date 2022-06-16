@@ -38,14 +38,14 @@ class BoardingDAO extends DAO {
     }
     
     public function update ($data, $statement = false) {
-        $animal = $this->create($data);
-        if (!$animal) {
+        $boarding = $this->create($data);
+        if (!$boarding) {
             return false;
         }
         
-        if ($animal->owner) {
-            $statement = $this->db->prepare("UPDATE {$this->table} SET name_animal = ?, gender_animal = ?, bday_animal = ?, sterilized_animal = ?, microship_animal = ?, fk_id_person = ? WHERE id = ?");
-            parent::store([$animal->name, $animal->gender, $animal->bday, $animal->sterilized, $animal->microship, $animal->owner->id, $animal->id], $statement);
+        if ($boarding->animal) {
+            $statement = $this->db->prepare("UPDATE {$this->table} SET startDate_boarding = ?, endDate_boarding = ?, fk_id_animal = ? WHERE id = ?");
+            parent::store([$boarding->dateStart, $boarding->dateEnd, $boarding->animal->id, $boarding->id], $statement);
         } else {
             //$statement = $this->db->prepare("UPDATE {$this->table} SET name = ? WHERE id = ?");
             //parent::store([$animal->name, $animal->id], $statement);

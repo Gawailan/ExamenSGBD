@@ -42,22 +42,22 @@ class BoardingController extends Controller
 
     public function update($data)
     {
-        $animal = Animal::find($data['id']);
-        if (!$animal) {
+        $boarding = Boarding::find($data['id']);
+        if (!$boarding) {
             return false;
         }
 
+        $boarding->dateStart = $data['dateStart'];
+        $boarding->dataEnd = $data['dateEnd'];
+        $boarding->animal = $data['animal_id'];
 
-        $animal->owner = $data['owner_id'] ? Person::find($data['owner_id']) : $animal->owner;
-        $animal->name = $data['name'] ? $data['name'] : $animal->name;
-
-        $animal->save();
+        $boarding->save();
         return $this->index();
     }
 
     public function destroy($id)
     {
-        $boarding = Boarding::find($id);
+        $boarding = Boarding::find($id['id']);
         if (!$boarding) {
             return false;
         }

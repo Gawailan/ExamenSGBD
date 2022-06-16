@@ -92,11 +92,9 @@ class Router{
         }
 
         if($this->request['id']){
-            var_dump($data);
             $this->controller_instance->{$this->request['action']}($this->request['id'], $data);
         }
         else{
-            var_dump($data);
             $this->controller_instance->{$this->request['action']}($data);
 
         }

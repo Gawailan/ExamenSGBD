@@ -12,9 +12,7 @@
         <li><a href="/boarding">Séjour</a></li>
         <li><a href="/animal">Animaux</a></li>
     </ul>
-    <form action="index.php" method="post">
-        <input type="hidden" name="entity" value="Boarding">
-        <input type="hidden" name="action" value="store">
+    <form action="/boarding/store" method="post">
         <label>Date de d'entrée:</label>
         <input type="date" name="dateStart">
         <label>Date de de sortie:</label>
