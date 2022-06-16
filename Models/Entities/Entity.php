@@ -63,4 +63,5 @@ abstract class Entity implements EntityInterface {
     }
         
     abstract public function __toString();
+
 }

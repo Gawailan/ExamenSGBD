@@ -117,6 +117,7 @@ abstract class DAO implements DAOInterface {
     public function store ($data, $statement = false) {
         try {
             $statement->execute($data);
+            unset($_SESSION['ERROR']);
             return true;
             
         } catch (PDOException $exception) {

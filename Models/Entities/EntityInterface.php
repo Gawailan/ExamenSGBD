@@ -8,7 +8,6 @@ interface EntityInterface {
     /*Doit permettre à l'entité de communiquer avec son DAO pour qu'elle se supprime en persistance*/
     public function delete();
     
-    
     /*Gestion de recherche d'entités*/
     /*Doit permettre de trouver et d'instancier une entité avec l'id = $id*/
     public static function find($id);

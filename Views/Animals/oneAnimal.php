@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<ul>
+    <ul>
         <li><a href="/person">Personnes</a></li>
         <li><a href="/boarding">Séjour</a></li>
         <li><a href="/animal">Animaux</a></li>
@@ -16,6 +16,10 @@
         <p>Nom</p>
     </b>
     <?= $animal->name; ?>
+    <b>
+        <p>Espece de l'animal</p>
+    </b>
+    <?= $animal->specie; ?>
     <b>
         <p>Genre</p>
     </b>
@@ -32,6 +36,10 @@
         <p>Numéro de puce:</p>
     </b>
     <?= $animal->microship; ?>
+    <b>
+        <p>Information régime alimentaire:</p>
+    </b>
+    <?= $animal->behavior->toEat(); ?>
     <b>
         <p>Proprietaire</p>
     </b>

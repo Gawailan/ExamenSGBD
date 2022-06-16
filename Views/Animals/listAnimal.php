@@ -17,7 +17,7 @@
             <?php foreach ($animals as $animal) : ?>
                 <li><a href="/animal/show/<?= $animal->id; ?>"><?= $animal->name; ?> (<?= $animal->owner->name ?> <?= $animal->owner->firstname ?>)</a>
                     <a href="/animal/edit/<?= $animal->id; ?>">Editer</a>
-                    <form action="index.php" method="POST">
+                    <form action="/animal/destroy" method="POST">
                         <input type="hidden" name="id" value="<?= $animal->id; ?>">
                         <input type="submit" value="SUPPR">
                     </form>

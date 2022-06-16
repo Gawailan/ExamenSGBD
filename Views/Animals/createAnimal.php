@@ -15,6 +15,11 @@
     <form action="/animal/store" method="post">
         <label for="animal-name">Nom de l'animal:</label>
         <input id="animal-name" type="text" name="name">
+        <label for="animal-species">Espece de l'animal:</label>
+        <select name="specie" id="animal-species">
+            <option value="Canin">Canin</option>
+            <option value="Felin">Félin</option>
+        </select>
         <fieldset>
             <legend>Genre</legend>
             <input type="radio" name="gender" value="1">
@@ -33,6 +38,7 @@
         </fieldset>
         <label for="animal-microship">Numéro de puce:</label>
         <input id="animal-microship" type="text" name="microship">
+        <?php if(isset($_SESSION['ERROR']['DOUBLON_SHIP']) && !empty($_SESSION['ERROR']['DOUBLON_SHIP'])) {?><?=$_SESSION['ERROR']['DOUBLON_SHIP']?><?php } ?>
         <label for="owner_id">Propriétaire</label>
         <select name="owner_id" id="owner_id">
             <?php foreach ($persons as $person) : ?>
