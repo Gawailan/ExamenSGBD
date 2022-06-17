@@ -24,6 +24,9 @@ class AnimalController extends Controller
 
     public function store($data)
     {
+
+        $data = $this->checkData($data, "STORE");
+
         $owner = $data['owner_id'] ? Person::find($data['owner_id']) : false;
         $name = $data['name'] ? $data['name'] : false;
         $specie = $data['specie'];
@@ -32,15 +35,13 @@ class AnimalController extends Controller
         $sterilized = $data['sterilized'];
         $microship = $data['microship'];
 
-        $this->checkData($data, "STORE");
-
         if(empty($_SESSION['ERROR']['STORE'])){
             $animal = new Animal(0, $name, $specie, $gender, $bday, $sterilized, $microship, $owner);
             $animal->save();
             return $this->index();
         }
         else{
-            return header("Location: /animal/create");
+            return $this->create();
         }
     }
 
@@ -58,6 +59,7 @@ class AnimalController extends Controller
             return false;
         }
 
+        $data = $this->checkData($data, "UPDATE");
 
         $animal->owner = $data['owner_id'] ? Person::find($data['owner_id']) : $animal->owner;
         $animal->name = $data['name'] ? $data['name'] : $animal->name;
@@ -67,14 +69,12 @@ class AnimalController extends Controller
         $animal->sterilized = $data['sterilized'] ? $data['sterilized'] : $animal->sterilized;
         $animal->microship = $data['microship'] ? $data['microship'] : $animal->microship;
 
-        $this->checkData($data, "UPDATE");
-
         if(empty($_SESSION['ERROR']['UPDATE'])){
             $animal->save();
             return $this->index();
         }
         else{
-            return header("Location: /animal/edit/".$data['id']);
+            return $this->edit($data['id']);
         }
     }
 
@@ -88,16 +88,21 @@ class AnimalController extends Controller
         return $this->index();
     }
 
-    public function checkDoublon($newAnimal, $action)
+    public function checkDoublon($data, $action)
     {
-        var_dump($newAnimal);
         $animals = Animal::all();
         if(!empty($animals)){
             foreach ($animals as $animal) {
-                if ($animal->microship == $newAnimal) {
-                    $_SESSION['ERROR'][$action]['microship'] = "Le numero de puce existe déjà";
-                    return true;
+                if($action == 'STORE'){
+                    if ($animal->microship == $data['microship']) {
+                        $_SESSION['ERROR'][$action]['microship'] = "Le numero de puce existe déjà";
+                    }
+                }else{
+                    if ($animal->microship == $data['microship'] && $animal->id != $data['id']){
+                        $_SESSION['ERROR'][$action]['microship'] = "Le numero de puce existe déjà";
+                    }
                 }
+
             }
             return false;
         }
@@ -121,8 +126,12 @@ class AnimalController extends Controller
                 if(strlen($value) < 15 || strlen($value) > 15 || !is_numeric($value)){
                     $_SESSION['ERROR'][$action]['microship'] = "Le numero de puce n'est pas valide (15 Chiffres)";
                 }
-                $this->checkDoublon($value, $action);
+                $this->checkDoublon($datas, $action);
+            }
+            if(!empty($data) && $data == 'name'){
+                $datas[$data] = ucfirst($value);
             }
         }
+        return $datas;
     }
 }

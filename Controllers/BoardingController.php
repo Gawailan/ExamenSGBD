@@ -28,14 +28,14 @@ class BoardingController extends Controller
         $dateStart = $data['dateStart'] ? $data['dateStart'] : false;
         $dateEnd = $data['dateEnd'];
 
-        $this->checkData($data);
+        $this->checkData($data, 'STORE');
 
         if (empty($_SESSION['ERROR']['STORE'])) {
             $boarding = new Boarding(0, $dateStart, $dateEnd, $animal);
             $boarding->save();
             return $this->index();
         } else {
-            return header("Location: /boarding/create");
+            return $this->create();
         }
     }
 
@@ -53,12 +53,18 @@ class BoardingController extends Controller
             return false;
         }
 
-        $boarding->dateStart = $data['dateStart'];
-        $boarding->dataEnd = $data['dateEnd'];
-        $boarding->animal = $data['animal_id'];
+        $data['dateStart'] = $boarding->dateStart;
+        $data['dateEnd'] = $boarding->dateEnd;
+        $boarding->animal = $data['animal_id'] ? $data['animal_id'] : $boarding->animal;
 
-        $boarding->save();
-        return $this->index();
+        $this->checkData($data, 'UPDATE');
+
+        if (empty($_SESSION['ERROR']['UPDATE'])) {
+            $boarding->save();
+            return $this->index();
+        } else {
+            return $this->edit($data['id']);
+        }
     }
 
     public function destroy($id)
@@ -71,31 +77,31 @@ class BoardingController extends Controller
         return $this->index();
     }
 
-    public function checkData($datas)
+    public function checkData($datas, $action)
     {
         unset($_SESSION['ERROR']);
 
         foreach ($datas as $data => $value) {
             if (empty($value)) {
-                $_SESSION['ERROR']['STORE'][$data] = 'La valeur est vide !';
+                $_SESSION['ERROR'][$action][$data] = 'La valeur est vide !';
             }
         }
-        $this->checkDoublon($datas["dateStart"], $datas["dateEnd"], $datas['animal_id']);
+        $this->checkDoublon($datas, $action);
     }
 
-    public function checkDoublon($dateStart, $dateEnd, $animal)
+    public function checkDoublon($data, $action)
     {
-        $boardings = Boarding::where('fk_id_animal', $animal);
+        $boardings = Boarding::where('fk_id_animal', $data['animal_id']);
 
         if (!empty($boardings)) {
             foreach ($boardings as $boarding) {
-                if (($boarding->dateStart <= $dateStart && $boarding->dateEnd >= $dateStart) || ($boarding->$dateStart <= $dateEnd && $boarding->dateEnd >= $dateEnd)) {
-                    $_SESSION['ERROR']['STORE']['dateStart'] = 'Conflit avec un autre séjour.';
-                    $_SESSION['ERROR']['STORE']['dateEnd'] = 'Conflit avec un autre séjour.';
+                if (($boarding->dateStart <= $data['dateStart'] && $boarding->dateEnd >= $data['dateStart']) || ($boarding->dateStart <= $data['dateEnd'] && $boarding->dateEnd >= $data['dateEnd'])) {
+                    $_SESSION['ERROR'][$action]['dateStart'] = 'Conflit avec un autre séjour.';
+                    $_SESSION['ERROR'][$action]['dateEnd'] = 'Conflit avec un autre séjour.';
                 }
-                if ($boarding->dateStart > $dateStart && $boarding->dateEnd < $dateEnd) {
-                    $_SESSION['ERROR']['STORE']['dateStart'] = 'Conflit avec un autre séjour (Chevauchement).';
-                    $_SESSION['ERROR']['STORE']['dateEnd'] = 'Conflit avec un autre séjour (Chevauchement).';
+                if ($boarding->dateStart > $data['dateStart'] && $boarding->dateEnd < $data['dateEnd']) {
+                    $_SESSION['ERROR'][$action]['dateStart'] = 'Conflit avec un autre séjour (Chevauchement).';
+                    $_SESSION['ERROR'][$action]['dateEnd'] = 'Conflit avec un autre séjour (Chevauchement).';
                 }
             }
         }
