@@ -13,6 +13,18 @@ class AnimalController extends Controller
     public function show($id)
     {
         $animal = Animal::find($id);
+        if($animal->gender = 1){
+            $animal->gender = "Mâle";
+        }
+        else{
+            $animal->gender = "Femelle";
+        }
+        if($animal->sterilized = 1){
+            $animal->sterilized = "Oui";
+        }
+        else{
+            $animal->sterilized = "Non";
+        }
         include('../Views/Animals/oneAnimal.php');
     }
 
