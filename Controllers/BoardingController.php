@@ -27,11 +27,16 @@ class BoardingController extends Controller
         $animal = $data['animal_id'] ? Animal::find($data['animal_id']) : false;
         $dateStart = $data['dateStart'] ? $data['dateStart'] : false;
         $dateEnd = $data['dateEnd'];
-        //$owner = $data['owner_id'] ? $data['owner_id'] : false;
 
-        $boarding = new Boarding(0, $dateStart, $dateEnd, $animal);
-        $boarding->save();
-        return $this->index();
+        $this->checkData($data);
+
+        if (empty($_SESSION['ERROR']['STORE'])) {
+            $boarding = new Boarding(0, $dateStart, $dateEnd, $animal);
+            $boarding->save();
+            return $this->index();
+        } else {
+            return header("Location: /boarding/create");
+        }
     }
 
     public function edit($id)
@@ -64,5 +69,35 @@ class BoardingController extends Controller
         }
         $boarding->delete();
         return $this->index();
+    }
+
+    public function checkData($datas)
+    {
+        unset($_SESSION['ERROR']);
+
+        foreach ($datas as $data => $value) {
+            if (empty($value)) {
+                $_SESSION['ERROR']['STORE'][$data] = 'La valeur est vide !';
+            }
+        }
+        $this->checkDoublon($datas["dateStart"], $datas["dateEnd"], $datas['animal_id']);
+    }
+
+    public function checkDoublon($dateStart, $dateEnd, $animal)
+    {
+        $boardings = Boarding::where('fk_id_animal', $animal);
+
+        if (!empty($boardings)) {
+            foreach ($boardings as $boarding) {
+                if (($boarding->dateStart <= $dateStart && $boarding->dateEnd >= $dateStart) || ($boarding->$dateStart <= $dateEnd && $boarding->dateEnd >= $dateEnd)) {
+                    $_SESSION['ERROR']['STORE']['dateStart'] = 'Conflit avec un autre séjour.';
+                    $_SESSION['ERROR']['STORE']['dateEnd'] = 'Conflit avec un autre séjour.';
+                }
+                if ($boarding->dateStart > $dateStart && $boarding->dateEnd < $dateEnd) {
+                    $_SESSION['ERROR']['STORE']['dateStart'] = 'Conflit avec un autre séjour (Chevauchement).';
+                    $_SESSION['ERROR']['STORE']['dateEnd'] = 'Conflit avec un autre séjour (Chevauchement).';
+                }
+            }
+        }
     }
 }

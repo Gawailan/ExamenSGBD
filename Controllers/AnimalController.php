@@ -33,7 +33,7 @@ class AnimalController extends Controller
         $microship = $data['microship'];
 
         $this->checkData($data);
-        
+
         if(empty($_SESSION['ERROR']['STORE'])){
             $animal = new Animal(0, $name, $specie, $gender, $bday, $sterilized, $microship, $owner);
             $animal->save();
@@ -97,9 +97,18 @@ class AnimalController extends Controller
 
     public function checkData($datas){
         unset($_SESSION['ERROR']);
+        var_dump($datas);
         foreach($datas as $data => $value){
-            if(empty($value)){
-                $_SESSION['ERROR']['STORE'][$data] = "La valeur est vide !";
+            if($data == 'gender' || $data == 'sterilized'){
+                if($value != 1){
+                    if($value != 0){
+                        $_SESSION['ERROR']['STORE'][$data] = "La valeur est vide !";
+                    }
+                }
+            }else{
+                if(empty($value)){
+                    $_SESSION['ERROR']['STORE'][$data] = "La valeur est vide !";
+                }
             }
             if($data == 'microship'){
                 if(strlen($value) < 15 || strlen($value) > 15 || !is_numeric($value)){
