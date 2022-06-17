@@ -4,6 +4,7 @@ class BoardingController extends Controller
 {
     public function index()
     {
+        unset($_SESSION['ERROR']);
         $boardings = Boarding::all();
         include('../Views/Boardings/listBoarding.php');
     }

@@ -2,6 +2,7 @@
 
 class PersonController extends Controller {
     public function index () {
+        unset($_SESSION['ERROR']);
         $persons = Person::all();
         include('../Views/Persons/listPerson.php');
     }
