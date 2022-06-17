@@ -36,5 +36,14 @@ abstract class Controller
     {
         var_dump('action update not defined');
     }
+    
+    public function getDateDay(){
+        $nfdate = getdate();
+        if(strlen($nfdate['mon']) == 1){
+            $nfdate['mon'] = '0'.$nfdate['mon'];
+        }
+        $date = $nfdate['year'].'-'.$nfdate['mon'].'-'.$nfdate['mday'];
+        return $date;
+    }
 }
 ?>

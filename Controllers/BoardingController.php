@@ -4,6 +4,7 @@ class BoardingController extends Controller
 {
     public function index()
     {
+        $dateDay = Parent::getDateDay();
         unset($_SESSION['ERROR']);
         $boardings = Boarding::all();
         include('../Views/Boardings/listBoarding.php');

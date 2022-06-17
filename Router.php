@@ -24,7 +24,7 @@ class Router{
             'destroy'
         ];
         $this->controllers = [
-            'index' => 'PersonController',
+            'index' => 'HomeController',
             'animal' => 'AnimalController',
             'boarding' => 'BoardingController',
             'person' => 'PersonController'

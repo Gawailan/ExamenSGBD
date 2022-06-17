@@ -12,6 +12,7 @@ class AnimalController extends Controller
 
     public function show($id)
     {
+        $dateDay = Parent::getDateDay();
         $animal = Animal::find($id);
         if($animal->gender = 1){
             $animal->gender = "Mâle";
@@ -97,7 +98,7 @@ class AnimalController extends Controller
             return false;
         }
         $animal->delete();
-        return $this->index();
+        return header("Location: /animal");
     }
 
     public function checkDoublon($data, $action)

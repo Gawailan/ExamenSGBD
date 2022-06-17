@@ -11,9 +11,10 @@ class Animal extends Entity {
     protected $microship;
     protected $owner;
     private $behavior;
+    protected $boardings;
     protected static $dao_name = "AnimalDAO";
     
-    public function __construct ($id, $name, $specie, $gender, $bday, $sterilized, $microship, $owner) {
+    public function __construct ($id, $name, $specie, $gender, $bday, $sterilized, $microship, $owner, $boardings = false) {
         $this->id = $id;
         $this->name = $name;
         $this->specie = $specie;
@@ -30,6 +31,7 @@ class Animal extends Entity {
                 $this->behavior = new Felin();
             break;
         }
+        $this->boardings = $boardings;
         
         parent::__construct(self::$dao_name);
     }
@@ -42,6 +44,9 @@ class Animal extends Entity {
         if (property_exists($this, $prop)) {
             if ($prop == "owner") {
                 return $this->owner();
+            }
+            if ($prop == "boardings") {
+                return $this->boarding();
             }
             return $this->$prop;
         }
@@ -58,6 +63,13 @@ class Animal extends Entity {
     public function toEat(){
         echo "Tu tiens à ton animal ? Nourrit le !";
     }
+    
+    protected function boarding () {
+        if ($this->boardings) {
+            return $this->boardings;
+        }
+        $this->boardings = Boarding::where('fk_id_animal', $this->id);
+        return $this->boardings;
+    }
 }
-
 ?>
