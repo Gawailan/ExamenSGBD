@@ -32,9 +32,8 @@ class AnimalController extends Controller
         $sterilized = $data['sterilized'];
         $microship = $data['microship'];
 
-        $this->checkData($data); 
-        $this->checkDoublon($microship);       
-
+        $this->checkData($data);
+        
         if(empty($_SESSION['ERROR']['STORE'])){
             $animal = new Animal(0, $name, $specie, $gender, $bday, $sterilized, $microship, $owner);
             $animal->save();
