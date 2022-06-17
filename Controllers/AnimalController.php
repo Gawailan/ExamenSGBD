@@ -32,7 +32,7 @@ class AnimalController extends Controller
         $sterilized = $data['sterilized'];
         $microship = $data['microship'];
 
-        $this->checkData($data);
+        $this->checkData($data, "STORE");
 
         if(empty($_SESSION['ERROR']['STORE'])){
             $animal = new Animal(0, $name, $specie, $gender, $bday, $sterilized, $microship, $owner);
@@ -67,8 +67,15 @@ class AnimalController extends Controller
         $animal->sterilized = $data['sterilized'] ? $data['sterilized'] : $animal->sterilized;
         $animal->microship = $data['microship'] ? $data['microship'] : $animal->microship;
 
-        $animal->save();
-        return $this->index();
+        $this->checkData($data, "UPDATE");
+
+        if(empty($_SESSION['ERROR']['UPDATE'])){
+            $animal->save();
+            return $this->index();
+        }
+        else{
+            return header("Location: /animal/edit/".$data['id']);
+        }
     }
 
     public function destroy($id)
@@ -81,13 +88,14 @@ class AnimalController extends Controller
         return $this->index();
     }
 
-    public function checkDoublon($newAnimal)
+    public function checkDoublon($newAnimal, $action)
     {
+        var_dump($newAnimal);
         $animals = Animal::all();
         if(!empty($animals)){
             foreach ($animals as $animal) {
                 if ($animal->microship == $newAnimal) {
-                    $_SESSION['ERROR']['STORE']['microship'] = "Le numero de puce existe déjà";
+                    $_SESSION['ERROR'][$action]['microship'] = "Le numero de puce existe déjà";
                     return true;
                 }
             }
@@ -95,26 +103,25 @@ class AnimalController extends Controller
         }
     }
 
-    public function checkData($datas){
+    public function checkData($datas,$action){
         unset($_SESSION['ERROR']);
-        var_dump($datas);
         foreach($datas as $data => $value){
             if($data == 'gender' || $data == 'sterilized'){
                 if($value != 1){
                     if($value != 0){
-                        $_SESSION['ERROR']['STORE'][$data] = "La valeur est vide !";
+                        $_SESSION['ERROR'][$action][$data] = "La valeur est vide !";
                     }
                 }
             }else{
                 if(empty($value)){
-                    $_SESSION['ERROR']['STORE'][$data] = "La valeur est vide !";
+                    $_SESSION['ERROR'][$action][$data] = "La valeur est vide !";
                 }
             }
             if($data == 'microship'){
                 if(strlen($value) < 15 || strlen($value) > 15 || !is_numeric($value)){
-                    $_SESSION['ERROR']['STORE']['microship'] = "Le numero de puce n'est pas valide (15 Chiffres)";
+                    $_SESSION['ERROR'][$action]['microship'] = "Le numero de puce n'est pas valide (15 Chiffres)";
                 }
-                $this->checkDoublon($data);
+                $this->checkDoublon($value, $action);
             }
         }
     }
