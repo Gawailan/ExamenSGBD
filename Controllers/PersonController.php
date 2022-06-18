@@ -12,7 +12,7 @@ class PersonController extends Controller
     public function show($id)
     {
         $person = Person::find($id);
-        if(!empty($person)){
+        if($person){
             include('../Views/Persons/onePerson.php');
         }else{
             header("Location: /home");
@@ -29,24 +29,34 @@ class PersonController extends Controller
 
     public function store($data)
     {
+        if($data){
+            $data = $this->checkData($data, 'STORE');
 
-        $data = $this->checkData($data, 'STORE');
-
-        if (empty($_SESSION['ERROR']['STORE'])) {
-            $person = new Person(0, $data['name'], $data['firstname'], $data['bday'], $data['email'], $data['phone']);
-            $person->save();
+            if (empty($_SESSION['ERROR']['STORE'])) {
+                $person = new Person(0, $data['name'], $data['firstname'], $data['bday'], $data['email'], $data['phone']);
+                $person->save();
+                header("Location: /person/index");
+                die();
+            } else {
+                header("Location: /person/create");
+                die();
+            }
+        }else{
             header("Location: /person/index");
             die();
-        } else {
-            header("Location: /person/create");
-            die();
         }
+
     }
 
     public function edit($id)
     {
         $person = Person::find($id);
-        include('../Views/Persons/editPerson.php');
+        if($person){
+            include('../Views/Persons/editPerson.php');
+        }else{
+            header("Location: /person/index");
+            die();
+        }
     }
 
     public function update($data)
