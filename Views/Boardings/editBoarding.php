@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil</title>
+    <title>Séjour de: <?= $boarding->animal->name ?></title>
 </head>
 
 <body>
@@ -17,6 +17,7 @@
             <li><a href="/animal">Animaux</a></li>
         </ul>
     </nav>
+    <h3>Edition Séjour</h3>
     <form action="/boarding/update" method="post">
         <!-- ID -->
         <input type="hidden" name="id" value="<?= $boarding->id ?>">

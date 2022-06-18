@@ -34,9 +34,11 @@ class BoardingController extends Controller
         if (empty($_SESSION['ERROR']['STORE'])) {
             $boarding = new Boarding(0, $dateStart, $dateEnd, $animal);
             $boarding->save();
-            return $this->index();
+            header("Location: /boarding/index");
+            die();
         } else {
-            return $this->create();
+            header("Location: /boarding/create");
+            die();
         }
     }
 
@@ -51,7 +53,8 @@ class BoardingController extends Controller
     {
         $boarding = Boarding::find($data['id']);
         if (!$boarding) {
-            return false;
+            header("Location: /boarding/index");
+            die();
         }
 
         $data['dateStart'] = $boarding->dateStart;
@@ -62,9 +65,11 @@ class BoardingController extends Controller
 
         if (empty($_SESSION['ERROR']['UPDATE'])) {
             $boarding->save();
-            return $this->index();
+            header("Location: /boarding/index");
+            die();
         } else {
-            return $this->edit($data['id']);
+            header("Location: /boarding/edit/".$data['id']);
+            die();
         }
     }
 
@@ -72,10 +77,12 @@ class BoardingController extends Controller
     {
         $boarding = Boarding::find($id['id']);
         if (!$boarding) {
-            return false;
+            header("Location: /boarding/index");
+            die();
         }
         $boarding->delete();
-        return $this->index();
+        header("Location: /boarding/index");
+        die();
     }
 
     public function checkData($datas, $action)

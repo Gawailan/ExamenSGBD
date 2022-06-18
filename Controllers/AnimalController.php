@@ -51,10 +51,12 @@ class AnimalController extends Controller
         if(empty($_SESSION['ERROR']['STORE'])){
             $animal = new Animal(0, $name, $specie, $gender, $bday, $sterilized, $microship, $owner);
             $animal->save();
-            return $this->index();
+            header("Location: /animal/index");
+            die();
         }
         else{
-            return $this->create();
+            header("Location: /animal/create");
+            die();
         }
     }
 
@@ -69,7 +71,8 @@ class AnimalController extends Controller
     {
         $animal = Animal::find($data['id']);
         if (!$animal) {
-            return false;
+            header("Location: /animal/index");
+            die();
         }
 
         $data = $this->checkData($data, "UPDATE");
@@ -84,10 +87,12 @@ class AnimalController extends Controller
 
         if(empty($_SESSION['ERROR']['UPDATE'])){
             $animal->save();
-            return $this->index();
+            header("Location: /animal/index");
+            die();
         }
         else{
-            return $this->edit($data['id']);
+            header("Location: /animal/edit/".$data['id']);
+            die();
         }
     }
 
@@ -95,7 +100,8 @@ class AnimalController extends Controller
     {
         $animal = Animal::find($id['id']);
         if (!$animal) {
-            return false;
+            header("Location: /animal/index");
+            die();
         }
         $animal->delete();
         return header("Location: /animal");

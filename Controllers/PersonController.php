@@ -12,7 +12,13 @@ class PersonController extends Controller
     public function show($id)
     {
         $person = Person::find($id);
-        include('../Views/Persons/onePerson.php');
+        if(!empty($person)){
+            include('../Views/Persons/onePerson.php');
+        }else{
+            header("Location: /home");
+            die();
+        }
+        
     }
 
     public function create()
@@ -29,9 +35,11 @@ class PersonController extends Controller
         if (empty($_SESSION['ERROR']['STORE'])) {
             $person = new Person(0, $data['name'], $data['firstname'], $data['bday'], $data['email'], $data['phone']);
             $person->save();
-            return $this->index();
+            header("Location: /person/index");
+            die();
         } else {
-            return $this->create();
+            header("Location: /person/create");
+            die();
         }
     }
 
@@ -45,7 +53,8 @@ class PersonController extends Controller
     {
         $person = Person::find($data['id']);
         if (!$person) {
-            return false;
+            header("Location: /person/index");
+            die();
         }
 
         $data = $this->checkData($data, 'UPDATE');
@@ -59,10 +68,12 @@ class PersonController extends Controller
         if (empty($_SESSION['ERROR']['UPDATE'])) {
 
             $person->save();
-            return $this->index();
+            header("Location: /person/index");
+            die();
         }
         else{
-            return $this->edit($data['id']);
+            header("Location: /person/edit/".$data['id']);
+            die();
         }
     }
 
@@ -70,10 +81,12 @@ class PersonController extends Controller
     {
         $person = Person::find($id['id']);
         if (!$person) {
-            return false;
+            header("Location: /person/index");
+            die();
         }
         $person->delete();
-        return $this->index();
+        header("Location: /person/index");
+        die();
     }
 
     public function checkDoublon($data, $action)

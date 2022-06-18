@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil</title>
+    <link href="css/style.css" rel="stylesheet">
+    <title>Liste animal(s)</title>
 </head>
 
 <body>
@@ -19,6 +20,7 @@
     </nav>
     <div>
         <h1>Chennil: Pokedex des pets réels</h1>
+        <h3>Liste Animal</h3>
     </div>
     <div class=container>
     <?php if (isset($animals) && !empty($animals)) : ?>
