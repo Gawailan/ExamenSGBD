@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<nav id=nav>
+    <nav id=nav>
         <ul>
             <li><a href="/home">Acceuil</a></li>
             <li><a href="/person">Personnes</a></li>
@@ -18,25 +18,25 @@
             <li><a href="/animal">Animaux</a></li>
         </ul>
     </nav>
-    <div>
+    <div class="title">
         <h1>Chennil: Pokedex des pets réels</h1>
         <h3>Liste propriétaire</h3>
     </div>
     <div class=container>
-    <?php if (isset($persons) && !empty($persons)) : ?>
-        <ul>
-            <?php foreach ($persons as $person) : ?>
-                <li class=data><a href="/person/show/<?= $person->id; ?>"><?= $person->name; ?> <?= $person->firstname; ?></a>
-                    <a href="/person/edit/<?= $person->id; ?>">Editer</a>
-                    <form action="/person/destroy" method="POST">
-                        <input type="hidden" name="id" value="<?= $person->id; ?>">
-                        <input type="submit" value="SUPPR">
-                    </form>
-                </li></br>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-    <a href="/person/create">Ajouter un propriétaire</a>
+        <?php if (isset($persons) && !empty($persons)) : ?>
+            <ul>
+                <?php foreach ($persons as $person) : ?>
+                    <li class=data><a href="/person/show/<?= $person->id; ?>"><?= $person->name; ?> <?= $person->firstname; ?></a>
+                        <a href="/person/edit/<?= $person->id; ?>">Editer</a>
+                        <form action="/person/destroy" method="POST">
+                            <input type="hidden" name="id" value="<?= $person->id; ?>">
+                            <input type="submit" value="SUPPR">
+                        </form>
+                    </li></br>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+        <a href="/person/create">Ajouter un propriétaire</a>
     </div>
 </body>
 

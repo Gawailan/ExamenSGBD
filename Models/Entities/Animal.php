@@ -61,7 +61,7 @@ class Animal extends Entity {
     }
 
     public function toEat(){
-        echo "Tu tiens à ton animal ? Nourrit le !";
+        $this->behavior->toEat();
     }
     
     protected function boarding () {

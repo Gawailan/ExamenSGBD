@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/css.css" rel="stylesheet">
     <title><?= $animal->name ?></title>
 </head>
 
@@ -17,7 +18,9 @@
             <li><a href="/animal">Animaux</a></li>
         </ul>
     </nav>
-    <h3>Information Animal</h3>
+    <div class="title">
+        <h3>Information Animal</h3>
+    </div>
     <b>
         <p>Nom</p>
     </b>
@@ -45,7 +48,7 @@
     <b>
         <p>Information régime alimentaire:</p>
     </b>
-    <?= $animal->behavior->toEat(); ?>
+    <?= $animal->toEat(); ?>
     <b>
         <p>Proprietaire:</p>
     </b>

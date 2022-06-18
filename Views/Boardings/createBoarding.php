@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/css.css" rel="stylesheet">
     <title>Crée séjour</title>
 </head>
 
@@ -17,16 +18,18 @@
             <li><a href="/animal">Animaux</a></li>
         </ul>
     </nav>
-    <h3>Création séjour</h3>
+    <div class="title">
+        <h3>Création séjour</h3>
+    </div>
     <form action="/boarding/store" method="post">
         <!-- Start Date -->
         <label>Date de d'entrée:</label></br>
         <input type="date" name="dateStart"></br>
-        <?php if(isset($_SESSION['ERROR']['STORE']['dateStart']) && !empty($_SESSION['ERROR']['STORE']['dateStart'])) {?><?=$_SESSION['ERROR']['STORE']['dateStart']?><?php } ?></br></br>
+        <?php if (isset($_SESSION['ERROR']['STORE']['dateStart']) && !empty($_SESSION['ERROR']['STORE']['dateStart'])) { ?><?= $_SESSION['ERROR']['STORE']['dateStart'] ?><?php } ?></br></br>
         <!-- End Date -->
         <label>Date de de sortie:</label></br>
         <input type="date" name="dateEnd"></br>
-        <?php if(isset($_SESSION['ERROR']['STORE']['dateEnd']) && !empty($_SESSION['ERROR']['STORE']['dateEnd'])) {?><?=$_SESSION['ERROR']['STORE']['dateEnd']?><?php } ?></br></br>
+        <?php if (isset($_SESSION['ERROR']['STORE']['dateEnd']) && !empty($_SESSION['ERROR']['STORE']['dateEnd'])) { ?><?= $_SESSION['ERROR']['STORE']['dateEnd'] ?><?php } ?></br></br>
         <!-- Animal -->
         <label for="animal_id">Nom de l'animal</label></br>
         <select name="animal_id" id="animal_id"></br>

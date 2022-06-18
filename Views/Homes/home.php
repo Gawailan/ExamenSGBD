@@ -20,10 +20,10 @@
             <li><a href="/animal">Animaux</a></li>
         </ul>
     </nav>
-    <div>
+    <div class="title">
         <h1>Chennil: Pokedex des pets réels</h1>
     </div>
-    <div>
+    <div class="container">
         <h3>Tableau de bord</h3>
         <p>
             <b>Date du jour:</b></br>
@@ -40,7 +40,7 @@
         <?php } ?>
         <!-- NBboarding -->
         <?php if (isset($nbboardings)) { ?>
-            <p>Total de séjour déjà réalisé ches nous: <?= $nbboardings ?></p>
+            <p>Total de séjour déjà chez nous (passé et à venir): <?= $nbboardings ?></p>
         <?php } ?>
         <!-- STARTtoday -->
         <b>Séjour commencant aujourd'hui:</b>
@@ -66,5 +66,4 @@
         <?php endif; ?>
     </div>
 </body>
-
 </html>

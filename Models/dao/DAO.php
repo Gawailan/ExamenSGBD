@@ -6,7 +6,7 @@ abstract class DAO implements DAOInterface {
     
     public function __construct ($table) {
         $this->table = $table;
-        $this->db = new PDO('mysql:host=localhost;dbname=chenil', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;dbname=chenildp', 'root', '');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
